@@ -1,0 +1,34 @@
+Changes made by Jeff B on 19 Jan 2024
+
+1) gc2.f: made Global_T and Global_U passed out.  
+    haz_main2.f: include Global_T and Global_U in call to GC2 subroutine 
+    cldist.f: CalcDist subroutine list of arguments
+    cldist.f: CalcDist add Global_T and Global_U to declarations passed out
+
+    * Note, T and U have origin at the first along strike coordinate of the rupture surface trace,
+    that Global_U is converted to Bea23 U (origin at hypocenter loc) in the directivity.f sub as described below. 
+
+2) haz_main2.f: include Global_T, Global_U in the call to Directivity subroutine
+    added an if statement for dirflag equal to 40 or 41 (the Bea23 dirflags). Requires M>=6 and T>=0.1
+    This uses 100 along strike hypocenters and just 1 down dip since Bea23 does not change with hypocenter depth.
+    For other dirflags the code is unchanged.
+
+    * Note, as Bea23 is only for strike-slip ruptures, the fault file directivity flag should be used to identify which faults to apply the model.
+    In the future, we can add to the above if statement so that only SS ruptures use the directivity model.
+
+3) declare1.h: add Global_T and Global_U 
+
+4) Directivity.f: can replace with new file.  Changes include:
+    add Global_T, Global_U in the arguments
+    add Global_T, Global_U to 'real' declarations, plus others: U, T, Smax1, Smax2, Version
+    add dirflag .eq. 40 and dirflag .eq. 41 to CheckDir
+    added a whole new block of code for dirflag=40,41 (Bea23 model). includes call to ruptdirct2023 subroutine.
+
+    * Note, this implementation is inefficent because it repeats the fG calculation for every period (it is period independent).
+    In a future update of Haz this can be cleaned up. 
+
+5) directivity_bea24.f 
+    This subroutine calculates the median and variability adjustment for the 2023 model.  Use it with dirflag=40 or 41
+
+6) add directivity_bea24.f and directivity_bea24.o to makefile
+
