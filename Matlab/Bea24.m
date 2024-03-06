@@ -11,6 +11,10 @@
 %% INPUT: M,U,T,Smax1,Smax2,Ztor,Rake,Period,Version
 % M:            Moment magnitude, 6<=M<=8. 1x1 double.
 % U,T:          the GC2 coordinates in km. Must both be nX1 doubles where n is the number of locations at which the model provides a prediction. Must be columnar.
+%                   Important note: The GC2 coordinate U must have origin at the rupture surface trace ordinate of the up-dip projection of the hypocenter,
+%                   which is the same as the epicenter for a vertically dipping rupture. This differs from the Spudich and Chiou (2015) convention, which places
+%                   the origin at the endpoint of the rupture trace (independent of the hypocenter). This shift is introduced in the accompanying GC2.m implementation
+%                   by specifying the option type.str='JB'.
 % Smax1:        the maximum S in the antistrike direction for the scenario in km (defined to be a negative value) . 1x1 double.
 % Smax2:        the maximum S in the strike direction for the scenario in km (a positive value). 1x1 double.
 % Ztor:         the depth to top of rupture in km (positive value). 1x1 double.

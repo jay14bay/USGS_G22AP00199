@@ -25,7 +25,11 @@ C      FUNCTION OUTPUT
 C      
 C      tobe written
 C***************************************************************************************************************************             
-       
+C     Important note: The GC2 coordinate U must have origin at the rupture surface trace ordinate of the up-dip projection 
+C     of the hypocenter, which is the same as the epicenter for a vertically dipping rupture. 
+C     This differs from the Spudich and Chiou (2015) convention, which places the origin at the endpoint of the 
+C     rupture trace (independent of the hypocenter). This shift is introduced in the accompanying Directivity.f
+C     subroutine where U = Global_U - hypoX  
       pi = acos(-1.0)
       RakeRad=Rake*pi/180
       data PhiPer/ 0.01  , 0.3 , 0.4  , 0.5 , 0.75  , 1.0  , 1.5  , 2.0, 
