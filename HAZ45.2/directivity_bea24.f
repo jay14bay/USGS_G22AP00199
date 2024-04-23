@@ -78,7 +78,7 @@ C     Coeffs
 
 C     Get S and theta
       S = U
-      if (S .lt. 0) then
+      if (S .lt. 0.0) then
        if (abs(S) .gt. abs(Smax1)) then
         S = abs(Smax1)
        else
@@ -90,15 +90,15 @@ C     Get S and theta
        endif
       endif
       Srake = S*cos(RakeRad) 
-      D = 3
+      D = 3.0
       S2 = sqrt(D**2 + Srake**2)
       fs2 = log(S2)
       if (fs2 .gt. 6.142) then
         fs2 = 6.142
       endif
       theta = abs(atan(T/U))
-      if (T .eq. 0 .and. U .eq. 0) then
-       theta = 0
+      if (T .eq. 0.0 .and. U .eq. 0.0) then
+       theta = 0.0
       endif
       ftheta = abs(cos(2*theta))
 
@@ -108,24 +108,24 @@ C     Distance Taper
        Rt = 0.1
       endif
       R1 = sqrt(T**2 + Ry0**2 )
-      if (mag .lt. 5) then
-       Rmax=40
-      elseif (mag .gt. 7) then  
-       Rmax=80
+      if (mag .lt. 5.0) then
+       Rmax=40.0
+      elseif (mag .gt. 7.0) then  
+       Rmax=80.0
       else
-       Rmax=-60+20*mag
+       Rmax=-60.0+20.0*mag
       endif
-      AR = -4*Rmax
-      fdist = 1-exp(AR/Rt - AR/Rmax)
+      AR = -4.0*Rmax
+      fdist = 1.0-exp(AR/Rt - AR/Rmax)
       if (Rt .ge. Rmax) then
-       fdist = 0
+       fdist = 0.0
       endif
 
 C     Ztor Taper
-      if (abs(Ztor) .lt. 20) then
-       fztor=1-abs(Ztor)/20
+      if (abs(Ztor) .lt. 20.0) then
+       fztor=1.0-abs(Ztor)/20.0
       else
-       fztor=0
+       fztor=0.0
       endif
 
 C     Directivity predictor fG
@@ -136,14 +136,14 @@ C     Directivity predictor fG
       fGprime=fG-fGbar
 
 C     Calculate Directivity adjustment fD
-      fD=A*(2/(1+exp(-k*fGprime*fdist*fztor))-1)
+      fD=A*(2.0/(1.0+exp(-k*fGprime*fdist*fztor))-1.0)
 
 C     Final parameters, median and variability adj
       lnfd = fD
       if (Rt .le. Rmax) then
-       PhiRed = -C
+       PhiRed = -1.*C
       else
-       PhiRed = 0
+       PhiRed = 0.0
       endif
              
       return
@@ -169,7 +169,7 @@ C-----------------------------------------------------------------------
 
       dx=0.1;
       rk=Rake*pi/180
-      ysum=0
+      ysum=0.0
 
 C between the ends of the fault, strike direction
       n1=int(L1/dx+1)

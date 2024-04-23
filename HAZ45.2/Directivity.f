@@ -16,7 +16,7 @@ c          goto 100
           goto 100
         elseif (dirflag .eq. 106) then
           goto 100
-        elseif (dirflag .eq. 40) then
+        elseif (dirflag .eq. 40 .or. dirflag .eq. 41) then
           goto 100
         else
           write (*,*) 'Invalid directivity flag in run file.'

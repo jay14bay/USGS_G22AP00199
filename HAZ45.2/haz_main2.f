@@ -503,20 +503,20 @@ c               Set default for no randomization of hypocenters
                 nHypoZStep = 1
 
 C               Application of Directivity model. 
-                if ( fltDirect(iFlt) .eq. 0 ) then
+                if ( fltDirect(iFlt) .eq. 0 ) then ! no directivity for this fault
                 dirFlag1 = 0
                 elseif ( dirflag(iProb) .ge. 40 .and. dirflag(iProb) .le. 41
      1              .and. mag .ge. 6.0 .and. mag .le. 8.0 
-     2              .and. specT(iProb) .ge. 0.10 ) then
+     2              .and. specT(iProb) .ge. 0.10 ) then ! directivity for Bea24 model (dirflag=40 or 41)
                  dirFlag1 = 1
                    nHypoX = 100
                    nHypoZ = 1
                    pHypoX = 1./ 100.
                    pHypoZ = 1.
                 elseif ( dirflag(iProb) .ge. 1
-     1              .and. mag .gt. 5.6 .and. specT(iProb) .ge. 0.50 ) then
+     1              .and. mag .gt. 5.6 .and. specT(iProb) .ge. 0.50 ) then ! direc for older models 
                  dirFlag1 = 1
-                 if ( dirflag(iProb) .lt. 100 ) then     
+                 if ( dirflag(iProb) .lt. 100 ) then ! hypocenters for non-JWL model. 1 hypo for JWL
                    nHypoX = 9
                    nHypoZ = 9
                    pHypoX = 1./ 9.
