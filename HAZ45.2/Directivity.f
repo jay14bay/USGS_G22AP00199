@@ -49,7 +49,7 @@ c  -------------------------------------------------------------------
      3     fltGrid_z(MAXFLT_DD,MAXFLT_AS), RupWidth, RupLength, dipavgd, 
      4     dirMed, dirSigma, len1, wid1, fs, fd, aveDPP_est, hypoX, hypoY 
       real hypoZ, medadj, sigadj, DPP, lnfd, lnfn, lnfp, Y, s, x, theta, 
-     1     rake, az, cDPP
+     1     rake, az, cDPP, hypoU
       real Global_T, Global_U, U, T, Smax1, Smax2, PhiRed
       integer Version 
       
@@ -86,9 +86,9 @@ c     Bayless and Abrahamson 2023 model, DIRFLAG = 40,41
       if (dirflag .eq. 40 .or. dirflag .eq. 41 ) then                 
 c       Compute the coordinates of the hypocenter 
         len1 = RupLength * fs
-        hypoX = len1 + fltGrid_x(iLocDD,iLocAS)
+        hypoU = len1 
 c       Convert global U to U (origin at the hypocenter loc)
-          U = Global_U - hypoX
+          U = Global_U - hypoU
           T = Global_T      
 c       Other parameters
           Smax1 = -len1

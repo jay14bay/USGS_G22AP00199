@@ -74,7 +74,7 @@ C     -- Continue with median adjustment
 C     Coeffs
       Tpeak = 10**(-2.15+0.404*mag)
       x = log10(specT/Tpeak)
-      A = Amax*exp(-x**2 /(2*SigG**2) )
+      A = Amax*exp(-x**2.0 /(2.0*SigG**2.0) )
 
 C     Get S and theta
       S = U
